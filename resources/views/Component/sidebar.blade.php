@@ -36,7 +36,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
-                            Gallery
+                            Dashboard
                         </p>
                     </a>
                 </li>
@@ -44,7 +44,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
-                            Bagas
+                            Transaction
                         </p>
                     </a>
                 </li>
