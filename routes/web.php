@@ -20,3 +20,7 @@ Route::get('/landing-page', function () {
 Route::get('/dashboard-home', function () {
     return view('contents.dashboard-home');
 });
+
+Route::get('/login-page', function () {
+    return view('contents.login-page');
+});

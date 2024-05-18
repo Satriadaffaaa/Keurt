@@ -2,15 +2,11 @@
 
 @section('content')
 
-<div>
-    <h2>Login Here</h2>
-    <form>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="Insert Username Here"><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Insert Password Here"><br><br>
-        <button type="submit">Login</button>
-    </form>
-    <p>Doesn't have account? <a href="{{ route('register') }}">Register here</a></p>
+<div class="container vh-100 d-flex flex-column justify-content-center align-items-center">
+    <img src="{{ asset('asset/KRT.png') }}" alt="Your Logo" class="img-fluid mb-4" style="height: 250px;width: 250px;">
+    <h1 class="display-4 text-center">Asomasow</h1>
+    <p class="lead text-center">LOGIN</p>
+    <a href="#more" class="btn btn-primary">Start Here!</a>
 </div>
+
 @endsection
