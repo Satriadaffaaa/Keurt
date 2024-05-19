@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="comment-page" class="nav-link">
                         <i class="nav-icon fas fa-comment"></i>
                         <p>
                             Comment

@@ -36,3 +36,8 @@ Route::get('/payment-page', function () {
 Route::get('/add-payment', function () {
     return view('contents.add-payment');
 });
+
+
+Route::get('/comment-page', function () {
+    return view('contents.comment-page');
+});
