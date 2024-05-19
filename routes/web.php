@@ -28,3 +28,11 @@ Route::get('/login-page', function () {
 Route::get('/register-page', function () {
     return view('contents.register-page');
 });
+
+Route::get('/payment-page', function () {
+    return view('contents.payment-page');
+});
+
+Route::get('/add-payment', function () {
+    return view('contents.add-payment');
+});
