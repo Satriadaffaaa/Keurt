@@ -1,0 +1,16 @@
+.popup-error {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 400px;
+    z-index: 1000; 
+    animation: slideDown 0.5s ease forwards; 
+}
+
+@keyframes slideDown {
+    to {
+        top: 20px;
+    }
+}
