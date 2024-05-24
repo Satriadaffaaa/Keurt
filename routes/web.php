@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
@@ -15,7 +16,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/',function(){
+Route::get('/', function () {
     return view('contents.landing-page');
 });
 
@@ -39,6 +40,20 @@ Route::get('/payment-page', function () {
     return view('contents.payment-page');
 });
 
+Route::get('/transaction-page', function () {
+    return view('contents.transaction-page');
+});
+Route::get('/add-transaction-page', function () {
+    return view('contents.add-transaction-page');
+});
+Route::get('/transaction-page', [TransactionController::class, 'index']); // tampilkan data
+Route::get('/add-transaction-page', [TransactionController::class, 'create']); // create data
+Route::post('/add-transaction-page', [TransactionController::class, 'store']); // simpan data
+
+Route::get('/edit-transaction-page/edit/{id}', [TransactionController::class, 'edit']);
+Route::put('/edit-transaction-page/{id}', [TransactionController::class, 'update']);
+Route::delete('/dashboard-delete-transaction/{id}', [TransactionController::class, 'destroy']);
+
 Route::get('/add-payment', function () {
     return view('contents.add-payment');
 });
@@ -50,4 +65,4 @@ Route::get('/comment-page', function () {
 
 
 Route::resource('dashboard-home', HomeController::class)->middleware('auth');
-Auth::routes(['verify'=> true]);
+Auth::routes(['verify' => true]);
