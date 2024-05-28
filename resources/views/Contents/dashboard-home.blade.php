@@ -30,7 +30,7 @@
                     <div class="info-box-content">
                         <span class="info-box-text">Balance</span>
                         <span class="info-box-number">
-                            1.000.000
+                        {{ $totalBalance }}
                             <small>Rp</small>
                         </span>
                     </div>
@@ -46,7 +46,7 @@
                     <div class="info-box-content">
                         <span class="info-box-text">Income</span>
                         <span class="info-box-number">
-                            1.000.000
+                        {{ $totalBalance }}
                             <small>Rp</small>
                         </span>
                     </div>
@@ -63,7 +63,7 @@
                     <div class="info-box-content">
                         <span class="info-box-text">Expenses</span>
                         <span class="info-box-number">
-                            1.000.000
+                            
                             <small>Rp</small>
                         </span>
                     </div>
@@ -174,46 +174,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Iuran Warga</td>
-                            <td>02-02-2022</td>
-                            <td>+20000</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</button>
-                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Sumbangan Mesjid</td>
-                            <td>02-02-2022</td>
-                            <td>-20000</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</button>
-                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>17 Agustus</td>
-                            <td>17-08-2023</td>
-                            <td>-60000</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</button>
-                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Gotong Royong</td>
-                            <td>02-02-2022</td>
-                            <td>-20000</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</button>
-                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</button>
-                            </td>
-                        </tr>
+                        @foreach ($Transaction as $transaksi)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $transaksi->transaction }}</td>
+                                <td>{{ \Carbon\Carbon::parse($transaksi->tanggal)->format('d-m-Y') }}</td>
+                                <td>{{ $transaksi->amount }}</td>
+                                <td>
+                @if (auth()->user()->role == 'rt' || auth()->user()->role == 'bendahara')
+                    <a href="{{ route('transactions.edit', $transaksi->id) }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <form action="{{ route('transactions.destroy', $transaksi->id) }}" method="POST" style="display:inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this transaction?')">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </form>
+                @endif
+            </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

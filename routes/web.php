@@ -66,3 +66,7 @@ Route::get('/comment-page', function () {
 
 Route::resource('dashboard-home', HomeController::class)->middleware('auth');
 Auth::routes(['verify' => true]);
+
+Route::get('/dashboard-home', [TransactionController::class, 'index'])->name('dashboard-home');
+Route::get('/transactions/{id}/edit', [TransactionController::class, 'edit'])->name('transactions.edit');
+Route::delete('/transactions/{id}', [TransactionController::class, 'destroy'])->name('transactions.destroy');

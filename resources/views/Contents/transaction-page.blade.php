@@ -11,7 +11,11 @@
         <div class="col d-flex justify-content-between">
             <h3 class="mt-3 ms-1">Transaction</h3>
             <a href="add-transaction-page">
+            @auth
+                            @if (auth()->user()->role == 'rt' || auth()->user()->role == 'bendahara')
                 <button type="button" class="btn btn-primary mt-3">Add Transaction</button>
+                @endif
+                        @endauth
             </a>
         </div>
     </div>
@@ -35,18 +39,22 @@
                         <td class="text-center">{{ $transaksi->date }}</td>
                         <td class="text-center">{{ $transaksi->amount }}</td>
                         <td class="text-center">
-                            <div class="btn-group">
-                                <a href="{{ url('edit-transaction-page/edit/'.$transaksi->id) }}" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-edit"></i> Edit
-                                </a>
-                                <form action="{{ url('dashboard-delete-transaction/'.$transaksi->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this transaction?')">
-                                        <i class="fas fa-trash"></i> Delete
-                                    </button>
-                                </form>
-                            </div>
+                        @auth
+                            @if (auth()->user()->role == 'rt' || auth()->user()->role == 'bendahara')
+                                <div class="btn-group">
+                                    <a href="{{ url('edit-transaction-page/edit/'.$transaksi->id) }}" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <form action="{{ url('dashboard-delete-transaction/'.$transaksi->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this transaction?')">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            @endif
+                        @endauth
                         </td>
                     </tr>
                     @endforeach

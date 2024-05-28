@@ -14,11 +14,18 @@ class TransactionController extends Controller
 
 
     public function index()
-    {
-
-        $data['Transaction'] = Transaction::all();
-        return view('contents.transaction-page', $data);
+{
+    // Check if the current route is for the transaction-page
+    if (request()->is('transaction-page')) {
+        $transactions = Transaction::all();
+        return view('contents.transaction-page', ['Transaction' => $transactions]);
     }
+
+    // If the current route is not for the transaction-page, default to the dashboard-home view
+    $transactions = Transaction::all();
+    $totalBalance = $transactions->sum('amount');
+    return view('contents.dashboard-home', ['Transaction' => $transactions, 'totalBalance' => $totalBalance]);
+}
 
     /**
      * Show the form for creating a new resource.
