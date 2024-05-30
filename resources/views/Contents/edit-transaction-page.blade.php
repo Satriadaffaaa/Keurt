@@ -8,7 +8,7 @@
 <div class="container text-center">
     <div class="row align-items-start">
         <div class="col mt-3">
-            <h3>Add Transcation</h3>
+            <h3>Edit Transaksi</h3>
         </div>
     </div>
 </div>
@@ -23,16 +23,16 @@
                         @method('PUT')
                         <div class="row mb-3">
                             <div class="col-md-3">
-                                <label for="transaction" class="form-label">Transaction</label>
+                                <label for="transaction" class="form-label">Transaksi</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="transaction" name="transaction" placeholder="Add Transaction" value="{{$transaction->transaction}}" required>
+                                <input type="text" class="form-control" id="transaction" name="transaction" placeholder="Edit Transaksi" value="{{$transaction->transaction}}" required>
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-3">
-                                <label for="date" class="form-label">Date</label>
+                                <label for="date" class="form-label">Tanggal</label>
                             </div>
                             <div class="col-md-9">
                                 <input type="date" class="form-control" id="date" name="date" value="{{$transaction->date}}" required>
@@ -41,15 +41,15 @@
 
                         <div class="row mb-3">
                             <div class="col-md-3">
-                                <label for="amount" class="form-label">Amount</label>
+                                <label for="amount" class="form-label">Jumlah</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="amount" name="amount" placeholder="Add Amount" value="{{$transaction->amount}}" required>
+                                <input type="text" class="form-control" id="amount" name="amount" placeholder="Tambahkan Jumlah" value="{{$transaction->amount}}" required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary btn-lg w-100">Submit</button>
+                                <button type="submit" class="btn btn-primary btn-lg w-100">Edit Data</button>
                             </div>
                         </div>
                     </form>

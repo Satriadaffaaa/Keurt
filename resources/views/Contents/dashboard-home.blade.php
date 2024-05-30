@@ -12,7 +12,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Overview</h1>
+                <h1 class="m-0">Tinjauan</h1>
             </div><!-- /.col -->
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -28,9 +28,9 @@
                     <span class="info-box-icon bg-info elevation-1"><i class="fas fa-wallet"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Balance</span>
+                        <span class="info-box-text">Saldo</span>
                         <span class="info-box-number">
-                        {{ $totalBalance }}
+                            {{ $totalBalance }}
                             <small>Rp</small>
                         </span>
                     </div>
@@ -44,9 +44,9 @@
                     <span class="info-box-icon bg-success elevation-1"><i class="fas fa-money-bill-alt"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Income</span>
+                        <span class="info-box-text">Pemasukan</span>
                         <span class="info-box-number">
-                        {{ $totalBalance }}
+                            {{ $totalBalance }}
                             <small>Rp</small>
                         </span>
                     </div>
@@ -61,9 +61,9 @@
                     <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-piggy-bank"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Expenses</span>
+                        <span class="info-box-text">Pengeluaran</span>
                         <span class="info-box-number">
-                            
+
                             <small>Rp</small>
                         </span>
                     </div>
@@ -175,26 +175,26 @@
                     </thead>
                     <tbody>
                         @foreach ($Transaction as $transaksi)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $transaksi->transaction }}</td>
-                                <td>{{ \Carbon\Carbon::parse($transaksi->tanggal)->format('d-m-Y') }}</td>
-                                <td>{{ $transaksi->amount }}</td>
-                                <td>
-                @if (auth()->user()->role == 'rt' || auth()->user()->role == 'bendahara')
-                    <a href="{{ route('transactions.edit', $transaksi->id) }}" class="btn btn-primary btn-sm">
-                        <i class="fas fa-edit"></i> Edit
-                    </a>
-                    <form action="{{ route('transactions.destroy', $transaksi->id) }}" method="POST" style="display:inline-block;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this transaction?')">
-                            <i class="fas fa-trash"></i> Delete
-                        </button>
-                    </form>
-                @endif
-            </td>
-                            </tr>
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $transaksi->transaction }}</td>
+                            <td>{{ \Carbon\Carbon::parse($transaksi->tanggal)->format('d-m-Y') }}</td>
+                            <td>{{ $transaksi->amount }}</td>
+                            <td>
+                                @if (auth()->user()->role == 'rt' || auth()->user()->role == 'bendahara')
+                                <a href="{{ route('transactions.edit', $transaksi->id) }}" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <form action="{{ route('transactions.destroy', $transaksi->id) }}" method="POST" style="display:inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this transaction?')">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                                @endif
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>

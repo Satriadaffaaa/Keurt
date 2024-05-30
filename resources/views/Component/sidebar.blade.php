@@ -44,7 +44,7 @@
                     <a href="/dashboard-home" class="nav-link">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
-                            Dashboard
+                            Dasbor
                         </p>
                     </a>
                 </li>
@@ -52,7 +52,7 @@
                     <a href="/transaction-page" class="nav-link">
                         <i class="nav-icon fas fa-receipt"></i>
                         <p>
-                            Transaction
+                            Transaksi
                         </p>
                     </a>
                 </li>
@@ -60,7 +60,7 @@
                     <a href="/payment-page" class="nav-link">
                         <i class="nav-icon fas fa-receipt"></i>
                         <p>
-                            Payment
+                            Pembayaran
                         </p>
                     </a>
                 </li>
@@ -68,14 +68,14 @@
                     <a href="comment-page" class="nav-link">
                         <i class="nav-icon fas fa-comment"></i>
                         <p>
-                            Comment
+                            Forum
                         </p>
                     </a>
                 </li>
                 <li class="nav-item mt-auto">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); confirmLogout(event);" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
-                        <p>Logout</p>
+                        <p>Keluar</p>
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
