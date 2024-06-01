@@ -46,8 +46,11 @@ Route::get('/transaction-page', function () {
 Route::get('/add-transaction-page', function () {
     return view('contents.add-transaction-page');
 });
-Route::get('/transaction-page', [TransactionController::class, 'index']); // tampilkan data
-Route::get('/add-transaction-page', [TransactionController::class, 'create']); // create data
+
+Route::get('/dashboard-home', [TransactionController::class, 'showDashboard'])->name('dashboard-home');
+
+Route::get('/transaction-page', [TransactionController::class, 'index'])->name('transaction-page'); // tampilkan data
+Route::get('/add-transaction-page', [TransactionController::class, 'create'])->name('transaction-create');; // create data
 Route::post('/add-transaction-page', [TransactionController::class, 'store']); // simpan data
 
 Route::get('/edit-transaction-page/edit/{id}', [TransactionController::class, 'edit']);
@@ -66,7 +69,3 @@ Route::get('/comment-page', function () {
 
 Route::resource('dashboard-home', HomeController::class)->middleware('auth');
 Auth::routes(['verify' => true]);
-
-Route::get('/dashboard-home', [TransactionController::class, 'index'])->name('dashboard-home');
-Route::get('/transactions/{id}/edit', [TransactionController::class, 'edit'])->name('transactions.edit');
-Route::delete('/transactions/{id}', [TransactionController::class, 'destroy'])->name('transactions.destroy');

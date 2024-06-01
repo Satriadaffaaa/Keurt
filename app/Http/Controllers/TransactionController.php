@@ -11,28 +11,44 @@ class TransactionController extends Controller
     /**
      * Display a listing of the resource.
      */
+    private $totalAmount;
+    private $totalIncome;
+    private $totalExpenses;
 
-
+    private function calculateTotals()
+    {
+        $data['Transaction'] = Transaction::all();
+        $this->totalAmount = $data['Transaction']->sum('amount');
+        $this->totalIncome = $data['Transaction']->where('amount', '>', 0)->sum('amount');
+        $this->totalExpenses = $data['Transaction']->where('amount', '<', 0)->sum('amount');
+    }
     public function index()
-{
-    // Check if the current route is for the transaction-page
-    if (request()->is('transaction-page')) {
-        $transactions = Transaction::all();
-        return view('contents.transaction-page', ['Transaction' => $transactions]);
+    {
+        $this->calculateTotals();
+
+        $data['Transaction'] = Transaction::all();
+        return view('contents.transaction-page', [
+            'Transaction' => $data['Transaction'],
+            'totalAmount' => $this->totalAmount,
+            'totalIncome' => $this->totalIncome,
+            'totalExpenses' => $this->totalExpenses
+        ]);
     }
 
-    // If the current route is not for the transaction-page, default to the dashboard-home view
-    $transactions = Transaction::all();
-    $totalBalance = $transactions->sum('amount');
-    return view('contents.dashboard-home', ['Transaction' => $transactions, 'totalBalance' => $totalBalance]);
-}
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('contents.add-transaction-page');
+        $this->calculateTotals();
+
+        return view('contents.add-transaction-page', [
+            'totalAmount' => $this->totalAmount,
+            'totalIncome' => $this->totalIncome,
+            'totalExpenses' => $this->totalExpenses
+        ]);
     }
 
     /**
@@ -50,11 +66,9 @@ class TransactionController extends Controller
             'date' => $input['date'], // Pastikan untuk menyertakan tanggal
         ]);
 
-        // Opsional: mungkin Anda ingin mengambil data lagi setelah penyisipan
-        $data['Transaction'] = Transaction::all();
 
-        // Kembalikan tampilan dengan data
-        return view('contents.transaction-page', $data);
+        // Redirect ke halaman index
+        return redirect()->route('transaction-page');
     }
 
 

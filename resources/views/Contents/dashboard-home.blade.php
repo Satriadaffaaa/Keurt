@@ -30,7 +30,7 @@
                     <div class="info-box-content">
                         <span class="info-box-text">Saldo</span>
                         <span class="info-box-number">
-                            {{ $totalBalance }}
+                            {{number_format ( $totalAmount,2) }}
                             <small>Rp</small>
                         </span>
                     </div>
@@ -46,7 +46,7 @@
                     <div class="info-box-content">
                         <span class="info-box-text">Pemasukan</span>
                         <span class="info-box-number">
-                            {{ $totalBalance }}
+                            {{ number_format($totalIncome, 2) }}
                             <small>Rp</small>
                         </span>
                     </div>
@@ -63,6 +63,7 @@
                     <div class="info-box-content">
                         <span class="info-box-text">Pengeluaran</span>
                         <span class="info-box-number">
+                            {{ number_format($totalExpenses, 2) }}
 
                             <small>Rp</small>
                         </span>
