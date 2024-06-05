@@ -67,7 +67,13 @@
             <div class="col d-flex justify-content-between">
                 <h3 class="mt-3 ms-1">Transaksi</h3>
                 <div class="d-flex">
-                    <a href="{{ route('add-transaction-page') }}" class="btn btn-primary mt-3 me-3">Add Transaction</a>
+                    <a href="add-transaction-page">
+                        @auth
+                        @if (auth()->user()->role == 'rt' || auth()->user()->role == 'bendahara')
+                        <button type="button" class="btn btn-primary mt-3">Tambah Transaksi</button>
+                        @endif
+                        @endauth
+                    </a>
                     <a href="{{ route('pdf.generate') }}" class="btn btn-link mt-3" style="color: #4CAF50; text-decoration: none;">
                         <i class="far fa-file-pdf" style="margin-right: 5px;"></i> Download Transaksi
                     </a>

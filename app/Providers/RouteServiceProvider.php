@@ -18,7 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard-home';
+    public const HOME = '/transaction-page';
 
     /**
      * The controller namespace for the application.
@@ -63,14 +63,13 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     public function destroy(Request $request)
-{
-    Auth::guard('web')->logout();
+    {
+        Auth::guard('web')->logout();
 
-    $request->session()->invalidate();
+        $request->session()->invalidate();
 
-    $request->session()->regenerateToken();
+        $request->session()->regenerateToken();
 
-    return redirect('/login-page'); 
-}
-
+        return redirect('/login-page');
+    }
 }
