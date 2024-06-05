@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
@@ -39,6 +40,9 @@ Route::get('/register-page', function () {
 Route::get('/payment-page', function () {
     return view('contents.payment-page');
 });
+Route::get('/add-payment-page', function () {
+    return view('contents.add-payment-page');
+});
 
 Route::get('/transaction-page', function () {
     return view('contents.transaction-page');
@@ -46,6 +50,7 @@ Route::get('/transaction-page', function () {
 Route::get('/add-transaction-page', function () {
     return view('contents.add-transaction-page');
 });
+
 
 Route::get('/dashboard-home', [TransactionController::class, 'showDashboard'])->name('dashboard-home');
 
@@ -57,9 +62,13 @@ Route::get('/edit-transaction-page/edit/{id}', [TransactionController::class, 'e
 Route::put('/edit-transaction-page/{id}', [TransactionController::class, 'update']);
 Route::delete('/dashboard-delete-transaction/{id}', [TransactionController::class, 'destroy']);
 
-Route::get('/add-payment', function () {
-    return view('contents.add-payment');
-});
+Route::get('/payment-page', [PaymentController::class, 'index'])->name('payment-page');
+Route::get('/add-payment-page', [PaymentController::class, 'create'])->name('payment-create');
+Route::post('/add-payment-page', [PaymentController::class, 'store']);
+
+Route::get('/edit-payment-page/edit/{id}', [PaymentController::class, 'edit']);
+Route::put('/edit-payment-page/{id}', [PaymentController::class, 'update']);
+Route::delete('/dashboard-delete-payment/{id}', [PaymentController::class, 'destroy']);
 
 
 Route::get('/comment-page', function () {
@@ -69,3 +78,6 @@ Route::get('/comment-page', function () {
 
 Route::resource('dashboard-home', HomeController::class)->middleware('auth');
 Auth::routes(['verify' => true]);
+
+Route::get('dashboard-home', [TransactionController::class, 'index'])->name('dashboard-home');
+Route::resource('transactions', TransactionController::class);

@@ -22,19 +22,32 @@ class TransactionController extends Controller
         $this->totalIncome = $data['Transaction']->where('amount', '>', 0)->sum('amount');
         $this->totalExpenses = $data['Transaction']->where('amount', '<', 0)->sum('amount');
     }
-    public function index()
-    {
-        $this->calculateTotals();
 
-        $data['Transaction'] = Transaction::all();
+
+    public function index()
+{
+    // Check if the current route is for the transaction-page
+    if (request()->is('transaction-page')) {
+        $this->calculateTotals();
+        $transactions = Transaction::all();
         return view('contents.transaction-page', [
-            'Transaction' => $data['Transaction'],
+            'Transaction' => $transactions,
             'totalAmount' => $this->totalAmount,
             'totalIncome' => $this->totalIncome,
             'totalExpenses' => $this->totalExpenses
         ]);
     }
 
+    // If the current route is not for the transaction-page, default to the dashboard-home view
+    $transactions = Transaction::all();
+    $this->calculateTotals();
+    return view('contents.dashboard-home', [
+        'Transaction' => $transactions,
+        'totalAmount' => $this->totalAmount,
+        'totalIncome' => $this->totalIncome,
+        'totalExpenses' => $this->totalExpenses
+    ]);
+}
 
 
     /**
