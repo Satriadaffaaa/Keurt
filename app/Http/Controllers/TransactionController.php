@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Illuminate\Support\Facades\View;
 
 
 class TransactionController extends Controller
@@ -56,28 +59,22 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        // Retrieve all input data from the request
-        $input = $request->all();
 
-        // Create a new record using the input data
+        $input = $request->all();
         Transaction::create([
             'transaction' => $input['transaction'],
             'amount' => $input['amount'],
-            'date' => $input['date'], // Pastikan untuk menyertakan tanggal
+            'date' => $input['date'],
         ]);
 
-
-        // Redirect ke halaman index
         return redirect()->route('transaction-page');
     }
 
 
     public function edit($id)
     {
-        // Mengambil data transaksi berdasarkan ID yang diberikan
         $transaction = Transaction::findOrFail($id);
 
-        // Memuat tampilan edit-transaction-page dan menyertakan data transaksi ke dalamnya
         return view('Contents.edit-transaction-page', compact('transaction'));
     }
 
@@ -95,5 +92,26 @@ class TransactionController extends Controller
         $data = Transaction::findOrFail($id);
         $data->delete();
         return redirect('transaction-page');
+    }
+
+    public function generatePDF()
+    {
+        $Transaction = Transaction::all();
+
+
+        $html = View::make('contents.transaction-pdf', compact('Transaction'))->render();
+
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+
+        $dompdf = new Dompdf($options);
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'landscape');
+
+        $dompdf->render();
+
+        return $dompdf->stream('transaction.pdf');
     }
 }
