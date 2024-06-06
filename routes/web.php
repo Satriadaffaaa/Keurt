@@ -79,3 +79,8 @@ Auth::routes(['verify' => true]);
 
 Route::get('dashboard-home', [TransactionController::class, 'index'])->name('dashboard-home');
 Route::resource('transactions', TransactionController::class);
+
+use App\Http\Controllers\ChatController;
+
+Route::get('/comment-page', [ChatController::class, 'index'])->name('comment-page');
+Route::post('/comment-page', [ChatController::class, 'store'])->middleware('auth');

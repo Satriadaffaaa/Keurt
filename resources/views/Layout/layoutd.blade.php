@@ -21,7 +21,7 @@
 </head>
 
 
-<body class="hold-transition light-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition ligth-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
 
 
@@ -58,20 +58,20 @@
 
     <!-- Skrip untuk menginisialisasi dan membuat grafik -->
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Fungsi untuk menginisialisasi data bulanan
             function initializeMonthlyData() {
                 var data = {
                     totalAmount: new Array(12).fill(0),
-                    totalIncome: new Array(12).fill(0),
-                    totalExpenses: new Array(12).fill(0)
+                    // totalIncome: new Array(12).fill(0),
+                    // totalExpenses: new Array(12).fill(0)
                 };
                 return data;
             }
 
             // Ambil data dari tabel
             var monthlyData = initializeMonthlyData();
-            $('#transactionTable tr').each(function() {
+            $('#transactionTable tr').each(function () {
                 var transaction = $(this).find('.column-transaction').text().trim();
                 var date = new Date($(this).find('.column-date').text().trim());
                 var amount = parseFloat($(this).find('.column-amount').text().trim());
@@ -102,19 +102,22 @@
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         borderColor: 'rgba(255, 99, 132, 1)',
                         borderWidth: 1
-                    }, {
-                        label: 'Income',
-                        data: monthlyData.totalIncome,
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }, {
-                        label: 'Expenses',
-                        data: monthlyData.totalExpenses,
-                        backgroundColor: 'rgba(255, 206, 86, 0.2)',
-                        borderColor: 'rgba(255, 206, 86, 1)',
-                        borderWidth: 1
-                    }]
+                        // }
+                        // ,{
+                        //     label: 'Income',
+                        //     data: monthlyData.totalIncome,
+                        //     backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        //     borderColor: 'rgba(54, 162, 235, 1)',
+                        //     borderWidth: 1
+                        // }, 
+                        // {
+                        //     label: 'Expenses',
+                        //     data: monthlyData.totalExpenses,
+                        //     backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                        //     borderColor: 'rgba(255, 206, 86, 1)',
+                        //     borderWidth: 1
+                    }
+                    ]
                 },
                 options: {
                     scales: {
@@ -128,7 +131,7 @@
     </script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             function updateRowVisibility() {
                 var rowCount = $('#rowCount').val();
                 $('#transactionTable tr').show();
@@ -137,19 +140,19 @@
                 }
             }
 
-            $('#toggleTransaction').change(function() {
+            $('#toggleTransaction').change(function () {
                 $('.column-transaction').toggle(this.checked);
             });
-            $('#toggleDate').change(function() {
+            $('#toggleDate').change(function () {
                 $('.column-date').toggle(this.checked);
             });
-            $('#toggleAmount').change(function() {
+            $('#toggleAmount').change(function () {
                 $('.column-amount').toggle(this.checked);
             });
-            $('#toggleAction').change(function() {
+            $('#toggleAction').change(function () {
                 $('.column-action').toggle(this.checked);
             });
-            $('#rowCount').change(function() {
+            $('#rowCount').change(function () {
                 updateRowVisibility();
             });
 
@@ -157,6 +160,8 @@
             updateRowVisibility();
         });
     </script>
+
+
 </body>
 
 </html>

@@ -7,111 +7,81 @@
 
 <!-- DIRECT Coment -->
 <div class="row">
-    <!-- Left column placeholder -->
-    <div class="col-md-6">
-        <!-- Content for the left column can go here -->
-    </div>
-
-    <!-- Right column with Direct Chat -->
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="card direct-chat direct-chat-warning">
             <div class="card-header">
-                <h3 class="card-title">Direct Chat</h3>
+                <h3 class="card-title">Chat Room</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
                     </button>
-
                 </div>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <!-- Conversations are loaded here -->
-                <div class="direct-chat-messages">
-                    <!-- Message. Default to the left -->
-                    <div class="direct-chat-msg">
-                        <div class="direct-chat-infos clearfix">
-                            <span class="direct-chat-name float-left">Alexander Pierce</span>
-                            <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+            <div class="card-body" style="height: 400px; overflow-y: auto;">
+                <div class="direct-chat-messages" style="height: 300px; overflow-y: auto;">
+                    @foreach($messages as $message)
+                        <div class="direct-chat-msg {{ $message->user->id == Auth::id() ? 'right' : '' }}">
+                            <div class="direct-chat-infos clearfix">
+                                <span class="direct-chat-name float-{{ $message->user->id == Auth::id() ? 'right' : 'left' }}">{{ $message->user->name }}</span>
+                                <span class="direct-chat-timestamp float-{{ $message->user->id == Auth::id() ? 'left' : 'right' }}">{{ $message->created_at->format('d M h:i a') }}</span>
+                            </div>
+                            <img class="direct-chat-img" src="{{ asset('template/dist/img/user1-128x128.jpg') }}" alt="message user image">
+                            <div class="direct-chat-text">
+                                {{ $message->message }}
+                            </div>
                         </div>
-                        <!-- /.direct-chat-infos -->
-                        <img class="direct-chat-img" src="{{asset('template/dist/img/user1-128x128.jpg')}}" alt="message user image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                            Is this template really for free? That's unbelievable!
-                        </div>
-                        <!-- /.direct-chat-text -->
-                    </div>
-                    <!-- /.direct-chat-msg -->
-
-                    <!-- Message to the right -->
-                    <div class="direct-chat-msg right">
-                        <div class="direct-chat-infos clearfix">
-                            <span class="direct-chat-name float-right">Sarah Bullock</span>
-                            <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-                        </div>
-                        <!-- /.direct-chat-infos -->
-                        <img class="direct-chat-img" src="{{asset('template/dist/img/user3-128x128.jpg')}}" alt="message user image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                            You better believe it!
-                        </div>
-                        <!-- /.direct-chat-text -->
-                    </div>
-                    <!-- /.direct-chat-msg -->
-
-                    <!-- Message. Default to the left -->
-                    <div class="direct-chat-msg">
-                        <div class="direct-chat-infos clearfix">
-                            <span class="direct-chat-name float-left">Alexander Pierce</span>
-                            <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
-                        </div>
-                        <!-- /.direct-chat-infos -->
-                        <img class="direct-chat-img" src="{{asset('template/dist/img/user1-128x128.jpg')}}" alt="message user image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                            Working with AdminLTE on a great new app! Wanna join?
-                        </div>
-                        <!-- /.direct-chat-text -->
-                    </div>
-                    <!-- /.direct-chat-msg -->
-
-                    <!-- Message to the right -->
-                    <div class="direct-chat-msg right">
-                        <div class="direct-chat-infos clearfix">
-                            <span class="direct-chat-name float-right">Sarah Bullock</span>
-                            <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
-                        </div>
-                        <!-- /.direct-chat-infos -->
-                        <img class="direct-chat-img" src="{{asset('template/dist/img/user3-128x128.jpg')}}" alt="message user image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                            I would love to.
-                        </div>
-                        <!-- /.direct-chat-text -->
-                    </div>
-                    <!-- /.direct-chat-msg -->
+                    @endforeach
                 </div>
-                <!--/.direct-chat-messages-->
             </div>
-            <!-- /.card-body -->
             <div class="card-footer">
-                <form action="#" method="post">
+                <form action="{{ url('/comment-page') }}" method="post">
+                    @csrf
                     <div class="input-group">
-                        <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                        <input type="text" name="message" placeholder="Type Message ..." class="form-control" required>
                         <span class="input-group-append">
-                            <button type="button" class="btn btn-warning">Send</button>
+                            <button type="submit" class="btn btn-warning">Send</button>
                         </span>
                     </div>
                 </form>
             </div>
-            <!-- /.card-footer-->
         </div>
-        <!--/.direct-chat -->
     </div>
-    <!-- /.col -->
 </div>
-<!-- /.row -->
 
+@endsection
 
+@section('styles')
+    @parent
+    <style>
+        .direct-chat .direct-chat-messages {
+            height: 400px;
+            overflow-y: auto;
+        }
+
+        .direct-chat .direct-chat-msg {
+            margin-bottom: 10px;
+        }
+
+        .direct-chat .right .direct-chat-text {
+            background: #3c8dbc;
+            color: #fff;
+            border-color: #367fa9;
+        }
+
+        .direct-chat .right .direct-chat-infos .direct-chat-name {
+            color: #fff;
+        }
+
+        .direct-chat .right .direct-chat-infos .direct-chat-timestamp {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .direct-chat .right .direct-chat-infos {
+            text-align: right;
+        }
+
+        .card-footer {
+            margin-top: 10px;
+        }
+    </style>
 @endsection

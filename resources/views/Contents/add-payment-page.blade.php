@@ -25,7 +25,8 @@
                                 <label for="description" class="form-label">Deskripsi</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="description" name="description" placeholder="Tambah Pembayaran" required>
+                                <input type="text" class="form-control" id="description" name="description"
+                                    placeholder="Tambah Pembayaran" required>
                             </div>
                         </div>
 
@@ -43,7 +44,8 @@
                                 <label for="amount" class="form-label">Jumlah</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="amount" name="amount" placeholder="Tambahkan Jumlah" required>
+                                <input type="text" class="form-control" id="amount" name="amount"
+                                    placeholder="Tambahkan Jumlah" required>
                             </div>
                         </div>
 
@@ -58,7 +60,7 @@
 
                         <div class="row mb-3">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary btn-lg w-100">Tambah Data</button>
+                                <button type="submit" class="btn btn-primary btn-lg w-100">Kirim</button>
                             </div>
                         </div>
                     </form>

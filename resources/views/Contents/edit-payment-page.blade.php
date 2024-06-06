@@ -8,7 +8,7 @@
 <div class="container text-center">
     <div class="row align-items-start">
         <div class="col mt-3">
-            <h3>Tambah Pembayaran</h3>
+            <h3>Edit Pembayaran</h3>
         </div>
     </div>
 </div>
@@ -18,7 +18,8 @@
         <div class="col mt-3">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ url('edit-payment-page/'. $payment->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ url('edit-payment-page/' . $payment->id) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row mb-3">
@@ -26,7 +27,8 @@
                                 <label for="description" class="form-label">Deskripsi</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="description" name="description" placeholder="Tambah Pembayaran" required>
+                                <input type="text" class="form-control" id="description" name="description"
+                                    placeholder="Tambah Pembayaran" value="{{$payment->description}}" required>
                             </div>
                         </div>
 
@@ -35,7 +37,8 @@
                                 <label for="date" class="form-label">Tanggal</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="date" class="form-control" id="date" name="date" required>
+                                <input type="date" class="form-control" id="date" name="date" value="{{$payment->date}}"
+                                    required>
                             </div>
                         </div>
 
@@ -44,7 +47,8 @@
                                 <label for="amount" class="form-label">Jumlah</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="amount" name="amount" placeholder="Tambahkan Jumlah" required>
+                                <input type="text" class="form-control" id="amount" name="amount"
+                                    placeholder="Tambahkan Jumlah" value="{{$payment->amount}}" required>
                             </div>
                         </div>
 
@@ -53,7 +57,8 @@
                                 <label for="image" class="form-label">Bukti</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="file" class="form-control" id="image" name="image" required>
+                                <input type="file" class="form-control" id="image" name="image"
+                                    value="{{$payment->image}}" required>
                             </div>
                         </div>
 

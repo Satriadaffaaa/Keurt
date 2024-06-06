@@ -103,7 +103,11 @@
                             <th class="text-center column-transaction">Transaksi</th>
                             <th class="text-center column-date">Tanggal</th>
                             <th class="text-center column-amount">Saldo</th>
+                            @auth
+                            @if (auth()->user()->role == 'rt' || auth()->user()->role == 'bendahara')
                             <th class="text-center column-action">Action</th>
+                            @endif
+                            @endauth
                         </tr>
                     </thead>
                     <tbody id="transactionTable">
@@ -113,6 +117,8 @@
                             <td class="text-center column-transaction">{{ $transaction->transaction }}</td>
                             <td class="text-center column-date">{{ $transaction->date }}</td>
                             <td class="text-center column-amount">{{ $transaction->amount }}</td>
+                            @auth
+                            @if (auth()->user()->role == 'rt' || auth()->user()->role == 'bendahara')
                             <td class="text-center column-action">
                                 <div class="btn-group">
                                     <a href="{{ url('edit-transaction-page/edit/'.$transaction->id) }}" class="btn btn-primary btn-sm">
@@ -127,6 +133,9 @@
                                     </form>
                                 </div>
                             </td>
+                            @endif
+                            @endauth
+                            
                         </tr>
                         @endforeach
                     </tbody>
